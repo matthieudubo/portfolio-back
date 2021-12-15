@@ -8,7 +8,7 @@ const port = process.env.PORT || 8000;
 app.use(express.json());
 
 const corsOptions = {
-  origin: "https://matthieudubo.github.io/portfolio-front/",
+  origin: "https://matthieudubo.github.io",
   credentials: true, // access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
