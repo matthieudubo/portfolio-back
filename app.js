@@ -8,18 +8,15 @@ const port = process.env.PORT || 8000;
 app.use(express.json());
 
 const corsOptions = {
-  origin: "https://matthieudubo.github.io",
+  origin: "*",
   credentials: true,
   optionSuccessStatus: 200,
+  maxAge: 3600,
 };
 app.use(cors(corsOptions));
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
-
 app.post('/', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
   const { name, subject, email, message } = req.body;
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -44,6 +41,8 @@ app.post('/', (req, res) => {
       console.log('Email sent: ' + info.response);
     }
   });
+
+  res.status(200).send()
 })
 
 app.listen(port, () => {
