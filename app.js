@@ -14,8 +14,8 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-app.post('/send', (req, res) => {
-  // res.header("Access-Control-Allow-Origin", "*");
+app.post('/', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   const { name, subject, email, message } = req.body;
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -26,7 +26,7 @@ app.post('/send', (req, res) => {
   });
   
   const mailOptions = {
-    from: 'youremail@gmail.com',
+    from: 'matthieu.dubo40@gmail.com',
     to: process.env.EMAIL,
     subject: subject,
     text: `Name: ${name}, email: ${email}
