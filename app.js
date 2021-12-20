@@ -9,13 +9,17 @@ app.use(express.json());
 
 const corsOptions = {
   origin: "https://matthieudubo.github.io",
-  credentials: true, // access-control-allow-credentials:true
+  credentials: true,
   optionSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 app.post('/', (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   const { name, subject, email, message } = req.body;
   const transporter = nodemailer.createTransport({
     service: 'gmail',
