@@ -8,19 +8,12 @@ const port = process.env.PORT || 8000;
 app.use(express.json());
 
 const corsOptions = {
-  origin: "https://matthieudubo.github.io",
+  origin: "*",
   credentials: true,
   optionSuccessStatus: 200,
+  maxAge: 3600,
 };
 app.use(cors(corsOptions));
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 
 app.post('/', (req, res) => {
   const { name, subject, email, message } = req.body;
